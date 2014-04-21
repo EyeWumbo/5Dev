@@ -1,55 +1,66 @@
 package app;
 
-import java.util.ArrayList;
 
-import state.State;
+import state.*;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class Application implements ApplicationListener{
 
-	ArrayList<State> statesTracked;
+	public static int TRANSITION_SIGNAL;
 	
-	private enum stateAccessor{
-		LOGIN(0),
-		ACCOUNT_CREATE(1),
-		LANDING(2),
-		MAIN_MENU(3),
-		GAME_MENU(4),
-		SCORE(5),
-		PROGRESSION(6),
-		GAME(7),
-		END(8),
-		ROUTINE(9);
-		
-		private final int index;
-		
-		stateAccessor(int index){
-			this.index = index;
-		}
-		
-	}
+	State[] statesTracked;
+	//int currentState;
+	State currentState;
+	private int currentSignal;
+	
+	private final int LOGIN = 0;
+	private final int ACCOUNT_CREATE = 1;
+	private final int LANDING = 2;
+	private final int MAIN_MENU = 3;
+	private final int GAME_MENU = 4;
+	private final int SCORE = 5;
+	private final int PROGRESSION = 6;
+	private final int GAME = 7;
+	private final int END = 8;
+	private final int ROUTINE = 9;
+	
 	
 	public Application(){
-		statesTracked = new ArrayList<State>(10);
+		
+		
+		
+		
+		//currentState = LOGIN;
+		
 	}
 	
 	@Override
 	public void create() {
 		// TODO Auto-generated method stub
-		
+		statesTracked = new State[10];
+		statesTracked[LOGIN] = new LoginState();
+		statesTracked[ACCOUNT_CREATE] = new AccountCreationState();
+		statesTracked[LANDING] = new LandingState();
+		statesTracked[MAIN_MENU] = new MainMenuState();
+		statesTracked[GAME_MENU] = new GameMenuState();
+		statesTracked[SCORE] = new ScoreState();
+		statesTracked[PROGRESSION] = new ProgressionState();
+		//statesTracked[GAME] = new GameState();
+		statesTracked[END] = new EndState();
+		statesTracked[ROUTINE] = new RoutineState();
+		currentState = statesTracked[LOGIN];
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+		currentState.dispose();
 	}
 
 	@Override
@@ -61,20 +72,29 @@ public class Application implements ApplicationListener{
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		
+		if(currentState.doneFading()){
+			currentSignal = TRANSITION_SIGNAL;
+			currentState = statesTracked[currentSignal];
+		}
+		
 		SpriteBatch batch = new SpriteBatch();
 		ShapeRenderer sRender = new ShapeRenderer();
-		
-		sRender.begin(ShapeType.Filled);
-		sRender.setColor(0, 1, 0, 1);
-		sRender.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		currentState.render(sRender);
+		currentState.update();
 		sRender.end();
-		
+		if(currentSignal != TRANSITION_SIGNAL){
+			currentState.setFade();
+		}
+		//statesTracked[currentState].render(sRender);
+
 	}
 
 	@Override
-	public void resize(int arg0, int arg1) {
+	public void resize(int x, int y) {
 		// TODO Auto-generated method stub
-		
+		currentState.resize(x, y);
 	}
 
 	@Override
