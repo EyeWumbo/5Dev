@@ -84,6 +84,9 @@ public class Application implements ApplicationListener{
 		currentState.render(sRender);
 		currentState.update();
 		sRender.end();
+		batch.begin();
+		currentState.render(batch);
+		batch.end();
 		if(currentSignal != TRANSITION_SIGNAL){
 			currentState.setFade();
 		}

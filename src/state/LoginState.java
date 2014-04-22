@@ -3,6 +3,7 @@ package state;
 import handler.Button;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -10,26 +11,30 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class LoginState extends State {
 
-	Button testButton;
+	Button testButton, testButton2;
 	
 	public LoginState(){
-		testButton = new Button(5, "what", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight()/2);
+		testButton = new Button(3, "User", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight()/3);
+		testButton2 = new Button(1, "New User", Gdx.graphics.getWidth() / 2, 2 * Gdx.graphics.getHeight() / 3);
+		this.backgroundColor = Color.GREEN;
 	}
 	
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		super.update();
 		if(Gdx.input.justTouched()){
-			if(testButton.update(Gdx.input.getX(), Gdx.input.getY())){
-				System.out.println("feaw");
-			}
+			testButton.update(Gdx.input.getX(), Gdx.input.getY());
+			testButton2.update(Gdx.input.getX(), Gdx.input.getY());
 		}
 	}
 
 	@Override
 	public void render(SpriteBatch batch) {
 		// TODO Auto-generated method stub
-		
+		super.render(batch);
+		testButton.render(batch, fadeMultiplier);
+		testButton2.render(batch, fadeMultiplier);
 	}
 	
 	@Override
@@ -38,11 +43,8 @@ public class LoginState extends State {
 		
 		super.render(sRender);
 		
-		sRender.begin(ShapeType.Filled);
-		sRender.setColor(0, 1 * fadeMultiplier, 0, 1);
-		sRender.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		
-		testButton.render(sRender, this.fadeMultiplier);		
+		testButton.render(sRender, fadeMultiplier);
+		testButton2.render(sRender, fadeMultiplier);
 		
 	}
 
