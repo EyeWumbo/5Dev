@@ -47,13 +47,15 @@ public class LoginState extends State {
 	public void update() {
 		// TODO Auto-generated method stub
 		super.update();
-		if(Gdx.input.justTouched()){
+
+		if(Gdx.input.justTouched() && !fade){
 			for(int i = 0; i < ButtonNames.size(); i++)
 			{
 				Button button = ButtonList.get(i);
 				button.update(Gdx.input.getX(), Gdx.input.getY());
 			}
 		}
+
 	}
 
 	@Override

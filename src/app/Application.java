@@ -2,6 +2,7 @@ package app;
 
 
 import state.*;
+import state.game.GameContainerState;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -51,7 +52,7 @@ public class Application implements ApplicationListener{
 		statesTracked[GAME_MENU] = new GameMenuState();
 		statesTracked[SCORE] = new ScoreState();
 		statesTracked[PROGRESSION] = new ProgressionState();
-		//statesTracked[GAME] = new GameState();
+		
 		statesTracked[END] = new EndState();
 		statesTracked[ROUTINE] = new RoutineState();
 		currentState = statesTracked[LOGIN];
@@ -75,14 +76,21 @@ public class Application implements ApplicationListener{
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		if(currentState.doneFading()){
-			currentSignal = TRANSITION_SIGNAL;
+			if(TRANSITION_SIGNAL > 10){
+				currentSignal = 7;	
+				statesTracked[currentSignal] = new GameContainerState(TRANSITION_SIGNAL);
+				TRANSITION_SIGNAL = 7;
+			}
+			else{
+				currentSignal = TRANSITION_SIGNAL;				
+			}	
 			currentState = statesTracked[currentSignal];
 		}
 		
 		SpriteBatch batch = new SpriteBatch();
 		ShapeRenderer sRender = new ShapeRenderer();
-		currentState.render(sRender);
 		currentState.update();
+		currentState.render(sRender);
 		sRender.end();
 		batch.begin();
 		currentState.render(batch);
