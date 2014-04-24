@@ -1,4 +1,5 @@
 package state;
+import java.io.*;
 
 import handler.Button;
 
@@ -9,6 +10,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class AccountCreationState extends State{
+	
+	public static final String filepath = "data//USERNAMES.txt";
 	
 	Button testButton;
 	
@@ -38,6 +41,58 @@ public class AccountCreationState extends State{
 		// TODO Auto-generated method stub
 		super.render(sRender);
 		testButton.render(sRender, fadeMultiplier);
+	}
+	
+	
+	// does nothing if user already exists
+	public Boolean doesUserExist(String name) throws IOException
+	{	
+		File file = new File(filepath);
+		BufferedReader in = new BufferedReader(new FileReader(file));
+		String line = in.readLine();; 
+		
+		while(line != null)
+		{
+			if(line.equals(name))
+			{
+				in.close();
+				return true;
+			}
+			line = in.readLine();
+		}
+		in.close();
+		return false;
+	}
+	
+	
+	public void addUser(String name) throws IOException
+	{
+		//System.out.println(doesUserExist(name));
+		if(doesUserExist(name) == false)
+		{
+			// need to write to "login.txt" given a new NAME.
+			BufferedWriter writer = null; 
+			try
+			{
+				File fnames = new File(filepath);
+				writer = new BufferedWriter(new FileWriter(fnames, true));
+	            writer.write(name);
+	            writer.newLine();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				try
+				{
+					writer.close();
+				}
+				catch(Exception e)
+				{}
+			}
+		}
 	}
 
 }
