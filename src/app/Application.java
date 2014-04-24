@@ -101,9 +101,9 @@ public class Application implements ApplicationListener{
 		batch.begin();
 		currentState.render(batch);
 		batch.end();
-		System.out.println(currentSignal + " " + TRANSITION_SIGNAL);
+		//System.out.println(currentSignal + " " + TRANSITION_SIGNAL);
 		if(currentSignal != TRANSITION_SIGNAL){
-			System.out.println("what");
+			//System.out.println("what");
 			currentState.setFade();
 		}
 		//statesTracked[currentState].render(sRender);
