@@ -25,7 +25,6 @@ public class Button{
 	Color color;
 	
 	public Button(int state, String buttonText, int xPos, int yPos){
-		System.out.println("fdao");
 		this.stateToMove = state;
 		this.buttonText = buttonText;
 		

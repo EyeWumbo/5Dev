@@ -24,7 +24,7 @@ public class ScoreState extends State{
 		
 		super.update();
 		
-		if(Gdx.input.justTouched()){
+		if(Gdx.input.justTouched() && !fade){
 			testButton.update(Gdx.input.getX(), Gdx.input.getY());
 		}
 	}
