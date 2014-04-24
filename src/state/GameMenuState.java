@@ -10,11 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class GameMenuState extends State{
 
-	Button testButton;
+	Button testButton1, testButton2;
 	
 	public GameMenuState(){
 		
-		testButton = new Button(3, "Main Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		testButton1 = new Button(9, "Routine Game", Gdx.graphics.getWidth() / 2, 2* Gdx.graphics.getHeight() / 3);
+		testButton2 = new Button(3, "Main Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3);
 		
 		this.backgroundColor = Color.WHITE;
 		
@@ -25,7 +26,8 @@ public class GameMenuState extends State{
 		// TODO Auto-generated method stub
 		super.update();
 		if(Gdx.input.justTouched()){
-			testButton.update(Gdx.input.getX(), Gdx.input.getY());
+			testButton1.update(Gdx.input.getX(), Gdx.input.getY());
+			testButton2.update(Gdx.input.getX(), Gdx.input.getY());
 		}
 	}
 
@@ -33,14 +35,16 @@ public class GameMenuState extends State{
 	public void render(SpriteBatch batch) {
 		// TODO Auto-generated method stub
 		super.render(batch);
-		testButton.render(batch, fadeMultiplier);
+		testButton1.render(batch, fadeMultiplier);
+		testButton2.render(batch, fadeMultiplier);
 	}
 
 	@Override
 	public void render(ShapeRenderer sRender) {
 		// TODO Auto-generated method stub
 		super.render(sRender);
-		testButton.render(sRender, fadeMultiplier);
+		testButton1.render(sRender, fadeMultiplier);
+		testButton2.render(sRender, fadeMultiplier);
 	}
 
 }

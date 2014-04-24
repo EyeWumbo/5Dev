@@ -25,7 +25,6 @@ public class Button{
 	Color color;
 	
 	public Button(int state, String buttonText, int xPos, int yPos){
-		System.out.println("fdao");
 		this.stateToMove = state;
 		this.buttonText = buttonText;
 		
@@ -34,9 +33,6 @@ public class Button{
 		
 		this.size = new Vector2(font.getBounds(buttonText).width * 2, font.getBounds(buttonText).height * 2);
 		this.position = new Vector2(xPos - size.x/2, yPos - size.y/2);
-		
-		
-		
 		
 	}
 	
@@ -71,4 +67,10 @@ public class Button{
 		//sRender.end();
 	}
 	
+	
+	public void setNewPosition(int newX, int newY){
+		this.size = new Vector2(font.getBounds(buttonText).width * 2, font.getBounds(buttonText).height * 2);
+		this.position = new Vector2(newX - size.x/2, newY - size.y/2);
+	
+	}
 }
