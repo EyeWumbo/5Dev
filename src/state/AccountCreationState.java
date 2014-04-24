@@ -1,46 +1,68 @@
 package state;
 import java.io.*;
 
-import handler.Button;
+import handler.*;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class AccountCreationState extends State{
 	
 	public static final String filepath = "data//USERNAMES.txt";
 	
-	Button testButton;
+	Button LandingButton; 
+	TextField field;
 	
 	public AccountCreationState(){
-		this.testButton = new Button(2, "Landing", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		this.LandingButton = new Button(2, "Welcome", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		this.backgroundColor = Color.CYAN;
+		this.field = new TextField(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3), true);
 	}
 	
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		super.update();
-		if(Gdx.input.justTouched() && !fade){
-			testButton.update(Gdx.input.getX(), Gdx.input.getY());
+		if(Gdx.input.justTouched() && !fade)
+		{
+			LandingButton.update(Gdx.input.getX(), Gdx.input.getY());
+			field.update(Gdx.input.getX(), Gdx.input.getY());
 		}
+		if(field.update() == true)
+		{
+			try {
+				addUser(field.getCurrentText());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(Gdx.input.isKeyPressed(Keys.ANY_KEY))
+		{
+			//System.out.println("woo");
+		}
+		
 	}
 
 	@Override
 	public void render(SpriteBatch batch) {
 		// TODO Auto-generated method stub
 		super.render(batch);
-		testButton.render(batch, fadeMultiplier);
+		LandingButton.render(batch, fadeMultiplier);
+		field.render(batch, fadeMultiplier);
 	}
 
 	@Override
 	public void render(ShapeRenderer sRender) {
 		// TODO Auto-generated method stub
 		super.render(sRender);
-		testButton.render(sRender, fadeMultiplier);
+		LandingButton.render(sRender, fadeMultiplier);
+		field.render(sRender, fadeMultiplier);
 	}
 	
 	

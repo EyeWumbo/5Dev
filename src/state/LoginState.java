@@ -23,8 +23,6 @@ public class LoginState extends State {
 		
 	public static final String filepath = ".//data//USERNAMES.txt";
 
-
-	Button EnterButton, CreateNewAccountButton;
 	
 	public LoginState(){ 
 		
@@ -90,9 +88,16 @@ public class LoginState extends State {
 		{
 			int h = Gdx.graphics.getHeight();
 			int w = Gdx.graphics.getWidth();
-			Button UserButton = new Button(3, ButtonNames.get(i), w/2, h - 50 - (i*(h/(ButtonNames.size() ))));
-			ButtonList.add(UserButton);
-			
+			if(i != ButtonNames.size() - 1)
+			{
+				Button UserButton = new Button(3, ButtonNames.get(i), w/2, h - 50 - (i*(h/(ButtonNames.size() ))));
+				ButtonList.add(UserButton);
+			}
+			else
+			{
+				Button UserButton = new Button(1, ButtonNames.get(i), w/2, h - 50 - (i*(h/(ButtonNames.size() ))));
+				ButtonList.add(UserButton);
+			}
 		}
 	}
 	
@@ -101,7 +106,7 @@ public class LoginState extends State {
 	{
 		ButtonNames = users; 
 		ButtonNames.add("CREATE NEW ACCOUNT");
-		ButtonNames.add("DELETE ALL USERS");
+		//ButtonNames.add("DELETE ALL USERS");
 	}
 	
 	public void run() throws IOException

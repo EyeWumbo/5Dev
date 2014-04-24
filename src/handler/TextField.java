@@ -164,4 +164,9 @@ public class TextField {
 		
 	}
 	
+	public String getCurrentText()
+	{
+		return this.currentText; 
+	}
+	
 }
