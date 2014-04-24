@@ -53,7 +53,7 @@ public class Application implements ApplicationListener{
 		statesTracked[SCORE] = new ScoreState();
 		statesTracked[PROGRESSION] = new ProgressionState();
 		
-		statesTracked[END] = new EndState();
+		//statesTracked[END] = new EndState();
 		statesTracked[ROUTINE] = new RoutineState();
 		currentState = statesTracked[LOGIN];
 	}
@@ -76,14 +76,20 @@ public class Application implements ApplicationListener{
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		if(currentState.doneFading()){
-			if(TRANSITION_SIGNAL > 10){
+			if(TRANSITION_SIGNAL > 10 && TRANSITION_SIGNAL < 80){
 				currentSignal = 7;	
 				statesTracked[currentSignal] = new GameContainerState(TRANSITION_SIGNAL);
 				TRANSITION_SIGNAL = 7;
 			}
-			else{
-				currentSignal = TRANSITION_SIGNAL;				
+			else if(TRANSITION_SIGNAL > 80){
+				System.out.println("bloop");
+				currentSignal = 8;
+				statesTracked[currentSignal] = new EndState(TRANSITION_SIGNAL % 80);
+				TRANSITION_SIGNAL = 8;
 			}	
+			else if(TRANSITION_SIGNAL < 10){
+				currentSignal = TRANSITION_SIGNAL;
+			}
 			currentState = statesTracked[currentSignal];
 		}
 		
@@ -95,7 +101,9 @@ public class Application implements ApplicationListener{
 		batch.begin();
 		currentState.render(batch);
 		batch.end();
+		System.out.println(currentSignal + " " + TRANSITION_SIGNAL);
 		if(currentSignal != TRANSITION_SIGNAL){
+			System.out.println("what");
 			currentState.setFade();
 		}
 		//statesTracked[currentState].render(sRender);

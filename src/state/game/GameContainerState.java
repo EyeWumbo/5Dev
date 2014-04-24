@@ -32,4 +32,9 @@ public class GameContainerState extends State {
 		game.update();
 	}
 	
+	@Override
+	public void setFade(){
+		game.setFade();
+	}
+	
 }

@@ -34,9 +34,6 @@ public class Button{
 		this.size = new Vector2(font.getBounds(buttonText).width * 2, font.getBounds(buttonText).height * 2);
 		this.position = new Vector2(xPos - size.x/2, yPos - size.y/2);
 		
-		
-		
-		
 	}
 	
 	public void update(float x, float y){
