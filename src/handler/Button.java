@@ -67,4 +67,10 @@ public class Button{
 		//sRender.end();
 	}
 	
+	
+	public void setNewPosition(int newX, int newY){
+		this.size = new Vector2(font.getBounds(buttonText).width * 2, font.getBounds(buttonText).height * 2);
+		this.position = new Vector2(newX - size.x/2, newY - size.y/2);
+	
+	}
 }
