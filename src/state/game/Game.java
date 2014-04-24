@@ -12,19 +12,19 @@ public class Game extends State{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+		super.update();
 	}
 
 	@Override
 	public void render(SpriteBatch batch) {
 		// TODO Auto-generated method stub
-		
+		super.render(batch);
 	}
 
 	@Override
 	public void render(ShapeRenderer sRender) {
 		// TODO Auto-generated method stub
-		
+		super.render(sRender);
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class LandingState extends State{
 	public void update() {
 		// TODO Auto-generated method stub
 		super.update();
-		if(Gdx.input.justTouched()){
+		if(Gdx.input.justTouched() && !fade){
 			testButton.update(Gdx.input.getX(), Gdx.input.getY());
 		}
 	}

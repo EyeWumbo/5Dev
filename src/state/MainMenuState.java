@@ -25,7 +25,7 @@ public class MainMenuState extends State{
 	public void update() {
 		// TODO Auto-generated method stub
 		super.update();
-		if(Gdx.input.justTouched()){
+		if(Gdx.input.justTouched() && !fade){
 			testButton1.update(Gdx.input.getX(), Gdx.input.getY());
 			testButton2.update(Gdx.input.getX(), Gdx.input.getY());
 			testButton3.update(Gdx.input.getX(), Gdx.input.getY());

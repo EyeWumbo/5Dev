@@ -15,7 +15,7 @@ public abstract class State{
 	protected boolean fade = false;
 	
 	public State(){
-
+		backgroundColor = Color.ORANGE;
 	}
 	
 	public void update(){
@@ -48,13 +48,13 @@ public abstract class State{
 	
 	protected void decrementFade(){
 		if(fade && fadeMultiplier > 0){
-			fadeMultiplier -= 0.01;
+			fadeMultiplier -= 0.11;
 		}
 	}
 	
 	protected void incrementFade(){
 		if(!fade && fadeMultiplier < 1){
-			fadeMultiplier += 0.01;
+			fadeMultiplier += 0.11;
 		}
 	}
 	
