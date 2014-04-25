@@ -21,7 +21,7 @@ public class RoutineState extends State{
 	public RoutineState(){
 		
 		firstGame = 0;
-		gameNum = 10;
+		gameNum = 4;
 		avaliableGames = 1;
 		gamePlayable = new Boolean[gameNum];
 		

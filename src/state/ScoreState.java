@@ -28,7 +28,7 @@ public class ScoreState extends State{
 	BitmapFont g2Score;
 	BitmapFont g3Score;
 	BitmapFont g4Score;
-	public static final String filepath = "./data/scores.txt";
+	public static final String filepath = "./data/SCORES.txt";
 	String currentUser = "BRENT";
 	
 	public ScoreState(){
@@ -51,15 +51,6 @@ public class ScoreState extends State{
 		threeStar = new Texture(Gdx.files.internal("data/3star.png"));
 		
 		gameScores = new int[] {0,0,0,0,0,0,0,0,0}; // 9 games
-		
-		try
-		{
-			getScores();
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		this.backgroundColor = Color.WHITE;
 	}
@@ -103,7 +94,14 @@ public class ScoreState extends State{
 	public void render(ShapeRenderer sRender) {
 		// TODO Auto-generated method stub
 		super.render(sRender);
-
+		try
+		{
+			getScores();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		testButton.render(sRender, fadeMultiplier);
 		
 	}
