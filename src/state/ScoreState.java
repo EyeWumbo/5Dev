@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import handler.Button;
+import app.Application;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -28,10 +29,10 @@ public class ScoreState extends State{
 	BitmapFont g3Score;
 	BitmapFont g4Score;
 	public static final String filepath = "./data/SCORES.txt";
-	String currentUser = "BRENT"; // REMOVE LATER
+	String currentUser;
 	
 	public ScoreState(){
-		
+				
 		testButton = new Button(3, "Main Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
 		g1Score = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
 		g2Score = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
@@ -48,15 +49,18 @@ public class ScoreState extends State{
 		threeStar = new Texture(Gdx.files.internal("data/3star.png"));
 		
 		gameScores = new int[] {0,0,0,0}; // 4 games
+		currentUser = Application.USER;
 
 		this.backgroundColor = Color.WHITE;
+
 	}
 	
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		super.update();
-		
+		currentUser = Application.USER;
+
 		if(Gdx.input.justTouched() && !fade){
 			testButton.update(Gdx.input.getX(), Gdx.input.getY());
 		}
@@ -107,22 +111,30 @@ public class ScoreState extends State{
 		File file = new File(filepath);
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		
+		System.out.println(currentUser);
 		String user = "";
 		
 		try
 		{
 			while(user != null)
 			{
-				user = in.readLine();
+				user = in.readLine().trim();
 				if(user != null)
-					{
-						if (user.equals(currentUser)){
+					{	
+						System.out.println("user: " + user + " current: " + currentUser);
+						if (user.equals(currentUser.trim())){
 							break;
+						}
+						else {
+							for (int i = 0; i < 4; i++){
+								in.readLine();
+							}
 						}
 					}
 			}
 			for (int i = 0; i < 4; i++){
-				gameScores[i] = Integer.parseInt(in.readLine());
+				gameScores[i] = Integer.parseInt(in.readLine().trim());
+				
 			}
 		}
 		catch(IOException e)
