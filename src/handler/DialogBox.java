@@ -46,7 +46,7 @@ public class DialogBox {
 				done = true;
 			}
 		}
-		if(Gdx.input.justTouched()){
+		if(Gdx.input.justTouched() && this.display){
 			touched = true;
 		}
 	}
