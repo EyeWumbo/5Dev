@@ -36,7 +36,7 @@ public class EndState extends State{
 			this.box = new DialogBox("Great!", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 			break;
 		}
-		toNext = new Button(0, "Next", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 15 / 100);
+		toNext = new Button(12, "Next", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 15 / 100);
 		toMenu = new Button(4, "Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 10 / 100);
 		this.gameName = gameName;
 		writeScores();
