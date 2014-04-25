@@ -112,7 +112,6 @@ public class ScoreState extends State{
 		File file = new File(filepath);
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		
-		System.out.println(currentUser);
 		String user = "";
 		
 		try
@@ -122,7 +121,6 @@ public class ScoreState extends State{
 				user = in.readLine().trim();
 				if(user != null)
 					{	
-						System.out.println("user: " + user + " current: " + currentUser);
 						if (user.equals(currentUser.trim())){
 							break;
 						}
