@@ -12,18 +12,17 @@ import com.badlogic.gdx.math.Vector2;
 
 public class IntroGame extends Game{
 
-	String name;
 	int age;
 	TextField field, field2;
 	
-	public IntroGame(String name, int age){
+	public IntroGame(int age){
 		
-		this.name = name;
+		this.stateName = "Introducing_Yourself";
 		this.age = age;
 		this.field = new TextField(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), true);
 		this.field2 = new TextField(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3), false);
 		this.backgroundColor = Color.BLACK;
-		
+		this.number = 1;
 	}
 	
 	public void update(){

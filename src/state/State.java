@@ -10,9 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public abstract class State{
 	
+	protected String stateName = "GenericState";
 	protected Color backgroundColor;
 	protected static float fadeMultiplier = 1;
-	protected boolean fade = false;
+	protected boolean fade = false, dim = false;
 	
 	public State(){
 		backgroundColor = Color.ORANGE;
@@ -46,16 +47,24 @@ public abstract class State{
 		this.fade = true;
 	}
 	
+	public void setDim(){
+		this.dim = true;
+	}
+	
 	protected void decrementFade(){
 		if(fade && fadeMultiplier > 0){
-			fadeMultiplier -= 0.11;
+			fadeMultiplier -= 0.05;
 		}
 	}
 	
 	protected void incrementFade(){
 		if(!fade && fadeMultiplier < 1){
-			fadeMultiplier += 0.11;
+			fadeMultiplier += 0.05;
 		}
+	}
+	
+	public boolean isFullColor(){
+		return fadeMultiplier >= 1;
 	}
 	
 	public boolean doneFading(){
@@ -63,5 +72,9 @@ public abstract class State{
 			fade = false;
 		}
 		return fadeMultiplier <= 0;
+	}
+	
+	public String getName(){
+		return stateName;
 	}
 }

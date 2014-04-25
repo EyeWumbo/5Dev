@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import handler.Button;
+import app.Application;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.TextInputListener;
@@ -52,7 +53,11 @@ public class LoginState extends State {
 			for(int i = 0; i < ButtonNames.size(); i++)
 			{
 				Button button = ButtonList.get(i);
-				button.update(Gdx.input.getX(), Gdx.input.getY());
+				if(button.update(Gdx.input.getX(), Gdx.input.getY())){
+					if(i < ButtonNames.size() - 2){
+						Application.USER = button.getInfo();
+					}
+				}
 			}
 		}
 
