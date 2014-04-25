@@ -163,6 +163,11 @@ public class TextField {
 		}
 		
 	}
+
+	public String getCurrentText() {
+		// TODO Auto-generated method stub
+		return currentText;
+	}
 	
 	public String getCurrentText(){
 		return currentText;

@@ -14,21 +14,21 @@ public class RoutineState extends State{
 	private int avaliableGames;
 	Button g0, g1, g2, g3, g4, g5, g6, g7, g8, g9;
 	private Button[] allGames;
-	private Boolean[] gamePlayable;
+	private static Boolean[] gamePlayable;
 	private int firstGame; // first game on menu screen
-	private int yChange;
+	// private int yChange; // used for scrolling
 	
 	public RoutineState(){
 		
 		firstGame = 0;
-		gameNum = 10;
-		avaliableGames = 2;
+		gameNum = 4;
+		avaliableGames = 1;
 		gamePlayable = new Boolean[gameNum];
 		
 		g0 = new Button(11, "Routine Game 0", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-		g1 = new Button(9 , "Routine Game 1", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
-		g2 = new Button(9 , "Routine Game 2", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
-		g3 = new Button(9 , "Routine Game 3", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
+		g1 = new Button(11, "Routine Game 1", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3);
+		g2 = new Button(9 , "Routine Game 2", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 4);
+		g3 = new Button(9 , "Routine Game 3", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 5);
 		g4 = new Button(9 , "Routine Game 4", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
 		g5 = new Button(3 , "Routine Game 5", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
 		g6 = new Button(9 , "Routine Game 6", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
@@ -42,7 +42,7 @@ public class RoutineState extends State{
 		for (int i = 1; i < gameNum; i++){
 			gamePlayable[i] = false;
 		}
-		
+
 		this.backgroundColor = Color.CYAN;
 	}
 	
@@ -50,6 +50,10 @@ public class RoutineState extends State{
 	public void update() {
 		// TODO Auto-generated method stub
 		super.update();
+		setAvaliableGames();
+		if (avaliableGames <= 5) {
+			setNewButtonPositions(0, avaliableGames-1, avaliableGames, avaliableGames);
+		}
 		
 		if(Gdx.input.justTouched()){
 			if (avaliableGames < 5){
@@ -73,20 +77,12 @@ public class RoutineState extends State{
 				if (Gdx.input.getDeltaY() > 7 && firstGame > 0){
 					// down swipe
 					firstGame--;
-					yChange = 5;
-					for (int i = firstGame; i < firstGame+5; i++) {
-						allGames[i].setNewPosition(Gdx.graphics.getWidth() / 2, yChange*  Gdx.graphics.getHeight() / 6);
-						yChange--;
-					}
+					setNewButtonPositions(firstGame, firstGame+5, 5, 5);
 				}
 				if (Gdx.input.getDeltaY() < -7 && firstGame < avaliableGames-5) {
 					// up swipe
 					firstGame++;
-					yChange = 5;
-					for (int i = firstGame; i < firstGame+5; i++) {
-						allGames[i].setNewPosition(Gdx.graphics.getWidth() / 2, yChange*  Gdx.graphics.getHeight() / 6);
-						yChange--;
-					}
+					setNewButtonPositions(firstGame, firstGame+5, 5, 5);
 				}
 			}
 		}
@@ -97,7 +93,7 @@ public class RoutineState extends State{
 		// TODO Auto-generated method stub
 		
 		super.render(batch);
-		if (avaliableGames < 5){
+		if (avaliableGames <= 5){
 			for (int i = 0; i < avaliableGames; i++){
 				if (gamePlayable[i] == true) {
 					allGames[i].render(batch, fadeMultiplier);
@@ -117,7 +113,7 @@ public class RoutineState extends State{
 	public void render(ShapeRenderer sRender) {
 		// TODO Auto-generated method stub
 		super.render(sRender);
-		if (avaliableGames < 5){
+		if (avaliableGames <= 5){
 			for (int i = 0; i < avaliableGames; i++){
 				if (gamePlayable[i] == true) {
 					allGames[i].render(sRender, fadeMultiplier);
@@ -133,8 +129,24 @@ public class RoutineState extends State{
 		}
 	}
 	
-	public void gameCompleted(int gameNum){
+	public static void gameCompleted(int gameNum){
 		gamePlayable[gameNum] = true;
 	}
-
+	
+	private void setAvaliableGames() {
+		avaliableGames = 0;
+		for (int i = 0; i < gameNum; i++) {
+			if (gamePlayable[i] == true) {
+				avaliableGames++;
+			}
+		}
+	}
+	
+	private void setNewButtonPositions(int start, int end, int yChange, int avaliableGames) {
+		for (int i = start; i < end; i++) {
+			allGames[i].setNewPosition(Gdx.graphics.getWidth() / 2, yChange * Gdx.graphics.getHeight() / (avaliableGames + 1));
+			yChange--;
+		}
+	}
+	
 }
