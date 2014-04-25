@@ -1,5 +1,7 @@
 package state;
 
+import java.io.File;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -63,5 +65,15 @@ public abstract class State{
 			fade = false;
 		}
 		return fadeMultiplier <= 0;
+	}
+	
+	public Boolean doesFileExist(String filepath)
+	{
+		File f = new File(filepath);
+		if(f.exists() == true)
+		{
+			return true;
+		}
+		return false; 
 	}
 }

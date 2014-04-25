@@ -7,6 +7,7 @@ import state.game.GameContainerState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class Application implements ApplicationListener{
 
 	public static int TRANSITION_SIGNAL;
+	public static String USER;
 	
 	State[] statesTracked;
 	//int currentState;
@@ -53,9 +55,10 @@ public class Application implements ApplicationListener{
 		statesTracked[SCORE] = new ScoreState();
 		statesTracked[PROGRESSION] = new ProgressionState();
 		
-		statesTracked[END] = new EndState();
+		//statesTracked[END] = new EndState();
 		statesTracked[ROUTINE] = new RoutineState();
 		currentState = statesTracked[LOGIN];
+		USER = "";
 	}
 
 	@Override
@@ -74,16 +77,22 @@ public class Application implements ApplicationListener{
 	public void render() {
 		// TODO Auto-generated method stub
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		Texture.setEnforcePotImages(false);
 		
 		if(currentState.doneFading()){
-			if(TRANSITION_SIGNAL > 10){
+			if(TRANSITION_SIGNAL > 10 && TRANSITION_SIGNAL < 80){
 				currentSignal = 7;	
 				statesTracked[currentSignal] = new GameContainerState(TRANSITION_SIGNAL);
 				TRANSITION_SIGNAL = 7;
 			}
-			else{
-				currentSignal = TRANSITION_SIGNAL;				
+			else if(TRANSITION_SIGNAL > 80){
+				currentSignal = 8;
+				statesTracked[currentSignal] = new EndState(TRANSITION_SIGNAL % 80, ((GameContainerState)(statesTracked[GAME])).getNumber());
+				TRANSITION_SIGNAL = 8;
 			}	
+			else if(TRANSITION_SIGNAL < 10){
+				currentSignal = TRANSITION_SIGNAL;
+			}
 			currentState = statesTracked[currentSignal];
 		}
 		

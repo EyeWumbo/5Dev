@@ -1,6 +1,7 @@
 package state.game;
 
 import handler.TextField;
+import app.Application;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -11,27 +12,32 @@ import com.badlogic.gdx.math.Vector2;
 
 public class IntroGame extends Game{
 
-	String name;
 	int age;
-	TextField field;
+	TextField field, field2;
 	
-	public IntroGame(String name, int age){
+	public IntroGame(int age){
 		
-		this.name = name;
+		this.stateName = "Introducing_Yourself";
 		this.age = age;
-		this.field = new TextField(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2));
+		this.field = new TextField(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), true);
+		this.field2 = new TextField(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3), false);
 		this.backgroundColor = Color.BLACK;
-		
+		this.number = 1;
 	}
 	
 	public void update(){
 		super.update();
 		if(Gdx.input.justTouched()){
 			field.update(Gdx.input.getX(), Gdx.input.getY());
+			field2.update(Gdx.input.getX(), Gdx.input.getY());
 		}
-		field.update();
-		if(Gdx.input.isKeyPressed(Keys.ANY_KEY)){
-			//System.out.println("woo");
+		if(field.update()){
+			field.animateTo(new Vector2(Gdx.graphics.getWidth() / 2, 2 * Gdx.graphics.getHeight() / 3));
+			field2.setVisible(true);
+		}
+		if(field2.update()){
+			System.out.println("okay");
+			Application.TRANSITION_SIGNAL = 83;
 		}
 	}
 	
@@ -39,6 +45,7 @@ public class IntroGame extends Game{
 		super.render(sRender);
 		
 		field.render(sRender, fadeMultiplier);
+		field2.render(sRender, fadeMultiplier);
 		
 	}
 	
@@ -46,6 +53,7 @@ public class IntroGame extends Game{
 		super.render(batch);
 		
 		field.render(batch, fadeMultiplier);
+		field2.render(batch, fadeMultiplier);
 		
 	}
 	

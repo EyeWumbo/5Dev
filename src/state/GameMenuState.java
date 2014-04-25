@@ -10,15 +10,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class GameMenuState extends State{
 
-	Button testButton, goToGame;
+	Button menuButton, goToGame;
+	
+	//private Button[] allBonusGames;
 	
 	public GameMenuState(){
 		
-		testButton = new Button(3, "Main Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3);
-		
-		goToGame = new Button(11, "Test Game", Gdx.graphics.getWidth() / 2, 2 * Gdx.graphics.getHeight() / 3);
+		menuButton = new Button(3, "Main Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3);
+		goToGame = new Button(9, "Routine Game", Gdx.graphics.getWidth() / 2, 2 * Gdx.graphics.getHeight() / 3);
 
-		
 		this.backgroundColor = Color.WHITE;
 		
 	}
@@ -29,7 +29,7 @@ public class GameMenuState extends State{
 		super.update();
 
 		if(Gdx.input.justTouched() && !fade){
-			testButton.update(Gdx.input.getX(), Gdx.input.getY());
+			menuButton.update(Gdx.input.getX(), Gdx.input.getY());
 			goToGame.update(Gdx.input.getX(), Gdx.input.getY());
 		}
 	}
@@ -39,7 +39,7 @@ public class GameMenuState extends State{
 		// TODO Auto-generated method stub
 		super.render(batch);
 
-		testButton.render(batch, fadeMultiplier);
+		menuButton.render(batch, fadeMultiplier);
 		goToGame.render(batch, fadeMultiplier);
 	}
 
@@ -48,7 +48,7 @@ public class GameMenuState extends State{
 		// TODO Auto-generated method stub
 		super.render(sRender);
 
-		testButton.render(sRender, fadeMultiplier);
+		menuButton.render(sRender, fadeMultiplier);
 		goToGame.render(sRender, fadeMultiplier);
 	}
 

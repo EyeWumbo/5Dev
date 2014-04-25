@@ -9,6 +9,8 @@ import state.State;
 public class Game extends State{
 
 	
+	protected int number;
+	
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
@@ -31,6 +33,10 @@ public class Game extends State{
 	public void resize(int x, int y) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public int getNumber(){
+		return this.number;
 	}
 
 }

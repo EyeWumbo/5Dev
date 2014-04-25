@@ -12,15 +12,14 @@ public class TextField {
 	
 	String currentText;
 	BitmapFont font;
-	boolean isFocus;
+	boolean isFocus, selectable, visible, isFading;
 	Color color;
-	Vector2 position;
-	Vector2 size;
-	float cursorFader;
+	Vector2 position, size, animationDestination;
+	float cursorFader, containerFader;
 	float count;
 	int currentCharacter, lastCharacter;
 	
-	public TextField(Vector2 position){
+	public TextField(Vector2 position, boolean visible){
 		font = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
 		font.setColor(Color.BLACK);
 		color = font.getColor();
@@ -29,20 +28,45 @@ public class TextField {
 				font.getBounds("****************").height * 2);
 		this.position = new Vector2(position.x - size.x/2, position.y - size.y/2);
 		this.isFocus = false;
+		this.selectable = true;
 		this.cursorFader = 0;
+		if(visible){containerFader=1;}
 		this.count = 0;
+		this.visible = visible;
 		
 	}
 	
 	public void update(float x, float y){
 		if(x > position.x && x < position.x + size.x &&
 				Gdx.graphics.getHeight() - y > position.y &&
-				Gdx.graphics.getHeight() - y < position.y + size.y){
+				Gdx.graphics.getHeight() - y < position.y + size.y && selectable){
 			this.isFocus = true;
 		}
 	}
 	
-	public void update(){
+	public boolean update(){
+		
+		if(!visible){
+			if(containerFader > 0){
+				containerFader -= 0.02f;
+			}
+			return false;
+		}
+		
+		if(isFading){
+			if(containerFader < 1){
+				containerFader += 0.02f;
+			}
+			if(containerFader <= 0){
+				isFading = false;
+			}
+		}
+		
+		if(!selectable && (this.animationDestination != null && this.position != this.animationDestination)){
+			Vector2 temp = this.animationDestination.cpy().sub(this.position);
+			this.position = this.position.add(temp.nor());
+		}
+		
 		if(isFocus){
 			Gdx.input.setOnscreenKeyboardVisible(true);
 			cursorFader = Math.abs((float)(Math.sin(count)));
@@ -53,13 +77,26 @@ public class TextField {
 			
 			if(Gdx.input.isKeyPressed(Keys.BACKSPACE)){
 				if(currentText.length() == 0){
-					return;
+					return false;
 				}
 				currentText = currentText.substring(0, currentText.length() - 1);
+				try {
+					Thread.sleep(75);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			if(currentText.length() > 12){
-				return;
+				return false;
+			}
+			
+			if(Gdx.input.isKeyPressed(Keys.ENTER)){
+				this.selectable = false;
+				this.isFocus = false;
+				System.out.println("hai");
+				return true;
 			}
 			
 			for(int i = Keys.A; i <= Keys.Z; i ++){
@@ -78,11 +115,24 @@ public class TextField {
 				currentCharacter = 0;
 			}
 		}
+		return false;
 		
 	}
 	
+	public void animateTo(Vector2 heading){
+		
+		this.animationDestination = new Vector2(heading.x - size.x / 2,
+				heading.y - size.y / 2);
+		System.out.println(this.position);
+	}
+	
+	public void setVisible(boolean bool){
+		visible = bool;
+		isFading = true;
+	}
+	
 	public void render(SpriteBatch batch, float fadeMultiplier){
-		if(fadeMultiplier <= 0){
+		if(fadeMultiplier <= 0 || !visible){
 			return;
 		}
 		batch.setColor(Color.BLACK);
@@ -97,16 +147,26 @@ public class TextField {
 	
 	public void render(ShapeRenderer sRender, float fadeMultiplier){
 		
-		sRender.setColor(1 * fadeMultiplier, 1 * fadeMultiplier, 1 * fadeMultiplier, 1);
+		if(!visible){
+			return;
+		}
+		
+		sRender.setColor(1 * fadeMultiplier * containerFader,
+				1 * fadeMultiplier * containerFader,
+				1 * fadeMultiplier * containerFader, 1);
 		sRender.rect(position.x, position.y, size.x, size.y);
 		
 		if(isFocus){
 			sRender.setColor(1 * cursorFader, 1 * cursorFader, 1 * cursorFader, 1);
-			sRender.rect(position.x + font.getBounds(currentText).width + font.getBounds("*").width
-					, position.y + (size.y * .15f)/2,
-					font.getBounds("*").width/2, size.y * .85f);
+			sRender.rect(position.x + font.getBounds(currentText).width + font.getBounds("*").width,
+					position.y + (size.y * .15f)/2, font.getBounds("*").width/2, size.y * .85f);
 		}
 		
+	}
+
+	public String getCurrentText() {
+		// TODO Auto-generated method stub
+		return currentText;
 	}
 	
 }
