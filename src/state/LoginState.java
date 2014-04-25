@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.Vector;
 
 import handler.Button;
+import handler.FileRenew;
+import app.Application;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.TextInputListener;
@@ -51,7 +53,7 @@ public class LoginState extends State {
 			{
 				Button button = ButtonList.get(i);
 				if(button.update(Gdx.input.getX(), Gdx.input.getY())){
-					if(i < ButtonNames.size() - 2){
+					if(i <= ButtonNames.size() - 2){
 						Application.USER = button.getInfo();
 					}
 				}
@@ -65,12 +67,12 @@ public class LoginState extends State {
 		// TODO Auto-generated method stub
 		
 		
-		System.out.println("BLsize: " + ButtonList.size());
-		System.out.println("BNAMESsize: " + ButtonNames.size());
+		//System.out.println("BLsize: " + ButtonList.size());
+		//System.out.println("BNAMESsize: " + ButtonNames.size());
 			
 		try 
 		{
-			System.out.println("");
+			//System.out.println("");
 			if(ButtonList.size() > ButtonNames.size())
 			{
 				for(int i = 0; i < ButtonList.size() - 2; i++)
@@ -162,9 +164,6 @@ public class LoginState extends State {
 	}
 	
 
-	
-<<<<<<< HEAD
-=======
 	public void deleteAllUsers() throws IOException
 	{
 		BufferedReader b = new BufferedReader(new FileReader(filepath));     
@@ -179,8 +178,6 @@ public class LoginState extends State {
 	}
 	
 	
-	
->>>>>>> 48ab42831522d71a41889b104b9e42c4ecc24430
 	public void getNames() throws IOException 
 	{
 		File file = new File(filepath);

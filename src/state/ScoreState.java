@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import handler.Button;
+import app.Application;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -50,13 +51,16 @@ public class ScoreState extends State{
 		gameScores = new int[] {0,0,0,0}; // 4 games
 
 		this.backgroundColor = Color.WHITE;
+		
+		
+		
 	}
 	
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		super.update();
-		
+		this.currentUser = Application.USER;
 		if(Gdx.input.justTouched() && !fade){
 			testButton.update(Gdx.input.getX(), Gdx.input.getY());
 		}
@@ -114,6 +118,7 @@ public class ScoreState extends State{
 			while(user != null)
 			{
 				user = in.readLine();
+				System.out.println(user);
 				if(user != null)
 					{
 						if (user.equals(currentUser)){
@@ -122,7 +127,7 @@ public class ScoreState extends State{
 					}
 			}
 			for (int i = 0; i < 4; i++){
-				gameScores[i] = Integer.parseInt(in.readLine());
+				gameScores[i] = Integer.parseInt(in.readLine().trim());
 			}
 		}
 		catch(IOException e)

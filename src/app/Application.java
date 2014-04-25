@@ -16,7 +16,6 @@ public class Application implements ApplicationListener{
 
 	public static int TRANSITION_SIGNAL;
 	public static String USER;
-	
 	State[] statesTracked;
 	//int currentState;
 	State currentState;
@@ -35,8 +34,6 @@ public class Application implements ApplicationListener{
 	
 	
 	public Application(){
-		
-		
 		
 		
 		//currentState = LOGIN;

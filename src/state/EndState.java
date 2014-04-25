@@ -39,7 +39,7 @@ public class EndState extends State{
 	}
 	
 	private void writeScores(){
-		FileHandle f = new FileHandle("data/scores");
+		FileHandle f = new FileHandle("data/SCORES.TXT");
 		String[] strs = f.readString().split("\n");
 		for(int i = 0; i < strs.length; i ++){
 			String s = strs[i].trim();
