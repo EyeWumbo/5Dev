@@ -28,10 +28,13 @@ public class EndState extends State{
 		switch(score){
 		case 1:
 			this.box = new DialogBox("Okay!", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+			break;
 		case 2:
 			this.box = new DialogBox("Good!", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+			break;
 		case 3:
 			this.box = new DialogBox("Great!", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+			break;
 		}
 		toNext = new Button(0, "Next", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 15 / 100);
 		toMenu = new Button(4, "Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 10 / 100);
