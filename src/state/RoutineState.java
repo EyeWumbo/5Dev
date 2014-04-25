@@ -25,7 +25,7 @@ public class RoutineState extends State{
 		avaliableGames = 1;
 		gamePlayable = new Boolean[gameNum];
 		
-		g0 = new Button(12, "Routine Game 0", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		g0 = new Button(13, "Routine Game 0", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		g1 = new Button(12, "Routine Game 1", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3);
 		g2 = new Button(9 , "Routine Game 2", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 4);
 		g3 = new Button(9 , "Routine Game 3", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 5);

@@ -11,27 +11,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
-public class GetInCarGame extends Game{
-
+public class ShirtGame extends Game{
 	Texture[] texs;
 	boolean isDone;
 	boolean[] greyed = {false, false, false, false};
 	DialogBox probState, solState;
 	float[] greyTimer = {1,1,1,1};
 	Color batchColor;
+	int randomBit;
 	
-	public GetInCarGame(){
+	public ShirtGame(){
 		texs = new Texture[4];
-		texs[0] = new Texture(new FileHandle("data/taxi.jpg"));
-		texs[1] = new Texture(new FileHandle("data/policecar.jpg"));
-		texs[2] = new Texture(new FileHandle("data/schoolbus.jpg"));
-		texs[3] = new Texture(new FileHandle("data/firetruck.jpg"));
+		texs[0] = new Texture(new FileHandle("data/shirt_green.jpg"));
+		texs[1] = new Texture(new FileHandle("data/shirt_blue.jpg"));
+		texs[2] = new Texture(new FileHandle("data/shirt_red.jpg"));
+		texs[3] = new Texture(new FileHandle("data/shirt_white.jpg"));
 		
-		this.number = 2;
+		this.number = 3;
 		
 		this.backgroundColor = Color.GREEN;
 		
-		probState = new DialogBox("Select the schoolbus.",
+		randomBit = (int)Math.random() * 4;
+		String[] possibles = {"green", "blue", "red", "white"};
+		
+		probState = new DialogBox("Select the " + possibles[randomBit] + " shirt!",
 				Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		solState = new DialogBox("Good Job!", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		isDone = false;
@@ -99,7 +102,7 @@ public class GetInCarGame extends Game{
 							(Gdx.graphics.getHeight() * .5f * k + texs[2*i+j].getHeight()/8),
 							Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
 					if(r.contains(Gdx.input.getX(), Gdx.input.getY())){
-						if(i + 2*j == 2){
+						if(i + 2*j == randomBit){
 							isDone = true;
 						}
 						else{

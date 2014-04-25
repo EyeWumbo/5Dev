@@ -19,6 +19,9 @@ public class GameContainerState extends State {
 		case 12:
 			game = new GetInCarGame();
 			break;
+		case 13:
+			game = new ShirtGame();
+			break;
 		default:
 			System.out.println(gameNumber);
 			break;
