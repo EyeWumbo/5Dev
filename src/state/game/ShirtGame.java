@@ -1,5 +1,7 @@
 package state.game;
 
+import java.util.Random;
+
 import handler.DialogBox;
 import app.Application;
 
@@ -22,16 +24,17 @@ public class ShirtGame extends Game{
 	
 	public ShirtGame(){
 		texs = new Texture[4];
-		texs[0] = new Texture(new FileHandle("data/shirt_green.jpg"));
-		texs[1] = new Texture(new FileHandle("data/shirt_blue.jpg"));
-		texs[2] = new Texture(new FileHandle("data/shirt_red.jpg"));
-		texs[3] = new Texture(new FileHandle("data/shirt_white.jpg"));
+		texs[0] = new Texture(new FileHandle("data/shirt_green.png"));
+		texs[1] = new Texture(new FileHandle("data/shirt_blue.png"));
+		texs[2] = new Texture(new FileHandle("data/shirt_red.png"));
+		texs[3] = new Texture(new FileHandle("data/shirt_white.png"));
 		
 		this.number = 3;
 		
 		this.backgroundColor = Color.GREEN;
 		
-		randomBit = (int)Math.random() * 4;
+		Random r = new Random();
+		randomBit = r.nextInt(4);
 		String[] possibles = {"green", "blue", "red", "white"};
 		
 		probState = new DialogBox("Select the " + possibles[randomBit] + " shirt!",
