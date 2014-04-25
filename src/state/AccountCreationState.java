@@ -24,6 +24,13 @@ public class AccountCreationState extends State{
 		this.LandingButton = new Button(2, "Welcome", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		this.backgroundColor = Color.CYAN;
 		this.field = new TextField(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3), true);
+		
+		try {
+			setUp();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 	@Override
@@ -71,10 +78,8 @@ public class AccountCreationState extends State{
 	{
 		if(doesFileExist(ScoresPath) == false)
 		{
-			BufferedWriter writer = null; 
-			writer = new BufferedWriter(new FileWriter(ScoresPath));
-            writer.write("");
-            writer.close();	
+			FileRenew fr = new FileRenew(); 
+			fr.restart(ScoresPath);
 		}
 	}
 		

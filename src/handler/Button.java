@@ -42,7 +42,19 @@ public class Button{
 				Gdx.graphics.getHeight() - y > position.y &&
 				Gdx.graphics.getHeight() - y < position.y + size.y)
 		{
-			Application.TRANSITION_SIGNAL = stateToMove;
+			System.out.println("UPDATE BUTTON IS DELTE: " + buttonText.equals("DELETE ALL USERS"));
+	
+
+			if(buttonText.equals("DELETE ALL USERS") == true)
+			{
+				FileRenew f = new FileRenew();
+				f.empty(".//data//USERNAMES.txt");
+				f.empty(".//data//SCORES.txt");
+			}
+			else
+			{
+				Application.TRANSITION_SIGNAL = stateToMove;
+			}
 		}
 	
 	}

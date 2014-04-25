@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import handler.Button;
+import handler.FileRenew;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.TextInputListener;
@@ -59,12 +60,38 @@ public class LoginState extends State {
 	@Override
 	public void render(SpriteBatch batch) {
 		// TODO Auto-generated method stub
+		
+		
+		System.out.println("BLsize: " + ButtonList.size());
+		System.out.println("BNAMESsize: " + ButtonNames.size());
+			
+		try 
+		{
+			System.out.println("");
+			if(ButtonList.size() > ButtonNames.size())
+			{
+				for(int i = 0; i < ButtonList.size() - 2; i++)
+				{
+					ButtonList.removeElementAt(0);
+				}
+				//System.out.println("BLsize: " + ButtonList.size());
+			}
+			getNames();
+			createUserButtons(); 
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		super.render(batch);
 		for(int i = 0; i < ButtonNames.size(); i++)
 		{
 			Button button = ButtonList.get(i);
 			button.render(batch, fadeMultiplier);
+	
 		}
+		
 
 	}
 	
@@ -83,17 +110,26 @@ public class LoginState extends State {
 	
 	public void createUserButtons()
 	{
-		makeButtonNames();
+		ButtonNames = users; 
+		ButtonNames.add("CREATE NEW ACCOUNT");
+		ButtonNames.add("DELETE ALL USERS");
+		
 		for(int i = 0; i < ButtonNames.size(); i++)
 		{
 			int h = Gdx.graphics.getHeight();
 			int w = Gdx.graphics.getWidth();
-			if(i != ButtonNames.size() - 1)
+			
+			if(i < ButtonNames.size() - 2)
 			{
 				Button UserButton = new Button(3, ButtonNames.get(i), w/2, h - 50 - (i*(h/(ButtonNames.size() ))));
 				ButtonList.add(UserButton);
 			}
-			else
+			else if (i == ButtonNames.size() - 1) // if DELETE USERS
+			{
+				Button UserButton = new Button(0, ButtonNames.get(i), w/2, h - 50 - (i*(h/(ButtonNames.size() ))));
+				ButtonList.add(UserButton);			
+			}
+			else // if CREATE ACC
 			{
 				Button UserButton = new Button(1, ButtonNames.get(i), w/2, h - 50 - (i*(h/(ButtonNames.size() ))));
 				ButtonList.add(UserButton);
@@ -102,12 +138,7 @@ public class LoginState extends State {
 	}
 	
 	
-	public void makeButtonNames()
-	{
-		ButtonNames = users; 
-		ButtonNames.add("CREATE NEW ACCOUNT");
-		//ButtonNames.add("DELETE ALL USERS");
-	}
+
 	
 	public void run() throws IOException
 	{
@@ -122,35 +153,16 @@ public class LoginState extends State {
 
 		if(doesFileExist(filepath) == false)
 		{
-			System.out.println("INSIDE SETUP FX");
-			BufferedWriter writer = null; 
-			writer = new BufferedWriter(new FileWriter(filepath));
-            writer.write("");
-            writer.close();	
+			FileRenew fr = new FileRenew(); 
+			fr.restart(filepath);
 		}
 	}
 	
 
 	
-	public void deleteAllUsers() throws IOException
-	{
-		BufferedReader b = new BufferedReader(new FileReader(filepath));     
-		if (b.readLine() != null) // if line not empty
-		{
-			b.close();
-			BufferedWriter writer = null; 
-			writer = new BufferedWriter(new FileWriter(filepath));
-            writer.write("");
-            writer.close(); 
-		}
-	}
-	
-	
-	
-	
 	public void getNames() throws IOException 
 	{
-		File file = new File(filepath);;
+		File file = new File(filepath);
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		
 		String line = ""; 
@@ -177,13 +189,7 @@ public class LoginState extends State {
 		}
 	}
 
-	public void displayUsers()
-	{
-		for(int i = 0; i < numUsers(); i++)
-		{
-			System.out.println(users.get(i));
-		}
-	}
+
 	
 	public int numUsers()
 	{
