@@ -9,8 +9,11 @@ import java.io.IOException;
 import java.util.Vector;
 
 import handler.Button;
+<<<<<<< HEAD
 import handler.FileRenew;
 import app.Application;
+=======
+>>>>>>> 6bb142451d0585e8928bdaf9351fdebac87d904e
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.TextInputListener;
@@ -52,10 +55,15 @@ public class LoginState extends State {
 			for(int i = 0; i < ButtonNames.size(); i++)
 			{
 				Button button = ButtonList.get(i);
+<<<<<<< HEAD
 				if(button.update(Gdx.input.getX(), Gdx.input.getY())) {
 					System.out.println("BUTTTON : " + button.getInfo() + " i : " + i + " size : " + ButtonNames.size());
 
 					if (i <= ButtonNames.size() - 2) {
+=======
+				if(button.update(Gdx.input.getX(), Gdx.input.getY())){
+					if(i < ButtonNames.size() - 2){
+>>>>>>> 6bb142451d0585e8928bdaf9351fdebac87d904e
 						Application.USER = button.getInfo();
 					}
 				}

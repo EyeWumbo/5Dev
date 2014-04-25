@@ -8,7 +8,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+<<<<<<< HEAD
 import com.badlogic.gdx.graphics.g2d.Sprite;
+=======
+>>>>>>> 6bb142451d0585e8928bdaf9351fdebac87d904e
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -37,11 +40,18 @@ public class EndState extends State{
 		toMenu = new Button(4, "Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 10 / 100);
 		this.gameName = gameName;
 		writeScores();
+<<<<<<< HEAD
 		RoutineState.gameCompleted(gameName);
 	}
 	
 	private void writeScores(){
 		FileHandle f = new FileHandle("data/SCORES.txt");
+=======
+	}
+	
+	private void writeScores(){
+		FileHandle f = new FileHandle("data/scores");
+>>>>>>> 6bb142451d0585e8928bdaf9351fdebac87d904e
 		String[] strs = f.readString().split("\n");
 		for(int i = 0; i < strs.length; i ++){
 			String s = strs[i].trim();
