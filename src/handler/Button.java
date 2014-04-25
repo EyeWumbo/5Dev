@@ -36,14 +36,20 @@ public class Button{
 		
 	}
 	
-	public void update(float x, float y){
+	public String getInfo(){
+		return buttonText;
+	}
+	
+	public boolean update(float x, float y){
 		
 		if(x > position.x && x < position.x + size.x &&
 				Gdx.graphics.getHeight() - y > position.y &&
 				Gdx.graphics.getHeight() - y < position.y + size.y)
 		{
 			Application.TRANSITION_SIGNAL = stateToMove;
+			return true;
 		}
+		return false;
 	
 	}
 	

@@ -14,7 +14,7 @@ public class GameContainerState extends State {
 		switch(gameNumber){
 		
 		case 11:
-			game = new IntroGame("Bob", 12);
+			game = new IntroGame(12);
 		default:
 			System.out.println(gameNumber);
 		}
@@ -35,6 +35,10 @@ public class GameContainerState extends State {
 	@Override
 	public void setFade(){
 		game.setFade();
+	}
+	
+	public int getNumber(){
+		return game.getNumber();
 	}
 	
 }

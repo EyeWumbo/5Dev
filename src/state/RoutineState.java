@@ -16,7 +16,7 @@ public class RoutineState extends State{
 	private Button[] allGames;
 	private static Boolean[] gamePlayable;
 	private int firstGame; // first game on menu screen
-	private int yChange;
+	// private int yChange; // used for scrolling
 	
 	public RoutineState(){
 		

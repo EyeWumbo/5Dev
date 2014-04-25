@@ -21,7 +21,6 @@ public class ScoreState extends State{
 	
 	Texture oneStar, twoStar, threeStar;
 	Texture g1, g2, g3, g4;
-	private int games;
 	Button testButton;
 	int[] gameScores;
 	BitmapFont g1Score;
@@ -29,13 +28,11 @@ public class ScoreState extends State{
 	BitmapFont g3Score;
 	BitmapFont g4Score;
 	public static final String filepath = "./data/SCORES.txt";
-	String currentUser = "BRENT";
+	String currentUser = "BRENT"; // REMOVE LATER
 	
 	public ScoreState(){
 		
-		games = 9;
-		
-		testButton = new Button(3, "Main Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / (games +1));
+		testButton = new Button(3, "Main Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
 		g1Score = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
 		g2Score = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
 		g3Score = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
@@ -50,7 +47,7 @@ public class ScoreState extends State{
 		twoStar = new Texture(Gdx.files.internal("data/2star.png"));
 		threeStar = new Texture(Gdx.files.internal("data/3star.png"));
 		
-		gameScores = new int[] {0,0,0,0,0,0,0,0,0}; // 9 games
+		gameScores = new int[] {0,0,0,0}; // 4 games
 
 		this.backgroundColor = Color.WHITE;
 	}
