@@ -1,7 +1,10 @@
 package state.game;
 
+import handler.DialogBox;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -11,6 +14,7 @@ public class GetInCarGame extends Game{
 
 	Texture taxi, policeCar, schoolBus, fireTruck;
 	Texture[] texs;
+	DialogBox probState;
 	
 	public GetInCarGame(){
 		texs = new Texture[4];
@@ -18,6 +22,13 @@ public class GetInCarGame extends Game{
 		texs[1] = new Texture(new FileHandle("data/policecar.jpg"));
 		texs[2] = new Texture(new FileHandle("data/schoolbus.jpg"));
 		texs[3] = new Texture(new FileHandle("assets/bus.jpg"));
+		
+		this.number = 2;
+		
+		this.backgroundColor = Color.GREEN;
+		
+		probState = new DialogBox("Select the schoolbus.",Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		
 	}
 	
 	
@@ -37,6 +48,8 @@ public class GetInCarGame extends Game{
 	}
 	
 	public void update(){
+		
+		probState.update(true);
 		
 		if(Gdx.input.justTouched()){
 			for(int i = 0; i < 2; i ++){

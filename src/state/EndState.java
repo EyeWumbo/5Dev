@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -36,6 +37,7 @@ public class EndState extends State{
 		toMenu = new Button(4, "Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 10 / 100);
 		this.gameName = gameName;
 		writeScores();
+		RoutineState.gameCompleted(gameName);
 	}
 	
 	private void writeScores(){

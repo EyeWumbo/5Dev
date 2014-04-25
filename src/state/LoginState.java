@@ -52,7 +52,8 @@ public class LoginState extends State {
 			for(int i = 0; i < ButtonNames.size(); i++)
 			{
 				Button button = ButtonList.get(i);
-				if(button.update(Gdx.input.getX(), Gdx.input.getY())){
+				if(button.update(Gdx.input.getX(), Gdx.input.getY())) {
+
 					if(i <= ButtonNames.size() - 2){
 						Application.USER = button.getInfo();
 					}

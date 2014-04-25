@@ -76,6 +76,10 @@ public abstract class State{
 		return fadeMultiplier <= 0;
 	}
 	
+	public String getName(){
+		return stateName;
+	}
+	
 	public Boolean doesFileExist(String filepath)
 	{
 		File f = new File(filepath);

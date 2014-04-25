@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.Vector;
 
 import handler.*;
+import app.Application;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -50,6 +51,8 @@ public class AccountCreationState extends State{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			Application.USER = field.getCurrentText();
+			
 		}
 		if(Gdx.input.isKeyPressed(Keys.ANY_KEY))
 		{

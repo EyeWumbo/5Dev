@@ -61,8 +61,8 @@ public class Button{
 			else
 			{
 				Application.TRANSITION_SIGNAL = stateToMove;
+				return true;
 			}
-			return true;
 		}
 		return false;
 	
