@@ -127,7 +127,7 @@ public class AccountCreationState extends State{
 				writer2 = new BufferedWriter(new FileWriter(fscores, true));
 	            writer2.write(name);
 	            writer2.newLine();
-	            for(int i = 0; i < 4; i++)
+	            for(int i = 0; i < 3; i++)
 	            {
 	            	writer2.write("0");
 	            	writer2.newLine();
