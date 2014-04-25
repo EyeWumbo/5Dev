@@ -82,9 +82,9 @@ public class Application implements ApplicationListener{
 				TRANSITION_SIGNAL = 7;
 			}
 			else if(TRANSITION_SIGNAL > 80){
-				System.out.println("bloop");
+				//System.out.println("bloop");
 				currentSignal = 8;
-				//statesTracked[currentSignal] = new EndState(TRANSITION_SIGNAL % 80);
+				statesTracked[currentSignal] = new EndState(TRANSITION_SIGNAL % 80);
 				TRANSITION_SIGNAL = 8;
 			}	
 			else if(TRANSITION_SIGNAL < 10){

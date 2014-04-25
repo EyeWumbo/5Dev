@@ -40,13 +40,8 @@ public class RoutineState extends State{
 		gamePlayable[0] = true;
 		
 		for (int i = 1; i < gameNum; i++){
-			gamePlayable[i] = true;
+			gamePlayable[i] = false;
 		}
-		
-		gamePlayable[1] = true;
-		gamePlayable[2] = true;
-		gamePlayable[3] = true;
-		gamePlayable[4] = true;
 
 		this.backgroundColor = Color.CYAN;
 	}

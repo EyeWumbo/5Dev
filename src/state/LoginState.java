@@ -28,7 +28,7 @@ public class LoginState extends State {
 		
 		try
 		{
-			System.out.println("BEFORE ENTERING SET UP");
+			//System.out.println("BEFORE ENTERING SET UP");
 			setUp();
 			run(); // should get names and display
 		} catch (IOException e)
@@ -156,10 +156,9 @@ public class LoginState extends State {
 		return false; 
 	}
 	
-	
 	public void getNames() throws IOException 
 	{
-		File file = new File(filepath);;
+		File file = new File(filepath);
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		
 		String line = ""; 
