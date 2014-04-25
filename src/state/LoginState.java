@@ -29,7 +29,7 @@ public class LoginState extends State {
 		
 		try
 		{
-			System.out.println("BEFORE ENTERING SET UP");
+			//System.out.println("BEFORE ENTERING SET UP");
 			setUp();
 			run(); // should get names and display
 		} catch (IOException e)
@@ -160,6 +160,24 @@ public class LoginState extends State {
 	
 
 	
+<<<<<<< HEAD
+=======
+	public void deleteAllUsers() throws IOException
+	{
+		BufferedReader b = new BufferedReader(new FileReader(filepath));     
+		if (b.readLine() != null) // if line not empty
+		{
+			b.close();
+			BufferedWriter writer = null; 
+			writer = new BufferedWriter(new FileWriter(filepath));
+            writer.write("");
+            writer.close(); 
+		}
+	}
+	
+	
+	
+>>>>>>> 48ab42831522d71a41889b104b9e42c4ecc24430
 	public void getNames() throws IOException 
 	{
 		File file = new File(filepath);
