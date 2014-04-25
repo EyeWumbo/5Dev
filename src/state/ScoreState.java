@@ -73,9 +73,9 @@ public class ScoreState extends State{
 		super.render(batch);
 		testButton.render(batch, fadeMultiplier);
 		
-		batch.draw(g1, Gdx.graphics.getWidth()/3, 5*Gdx.graphics.getHeight()/5);
-		batch.draw(g2, Gdx.graphics.getWidth()/3, 4*Gdx.graphics.getHeight()/5);
-		batch.draw(g3, Gdx.graphics.getWidth()/3, 3*Gdx.graphics.getHeight()/5);
+		batch.draw(g1, Gdx.graphics.getWidth()/3, 4*Gdx.graphics.getHeight()/5);
+		batch.draw(g2, Gdx.graphics.getWidth()/3, 3*Gdx.graphics.getHeight()/5);
+		batch.draw(g3, Gdx.graphics.getWidth()/3, 2*Gdx.graphics.getHeight()/5);
 		//batch.draw(g4, Gdx.graphics.getWidth()/3, 2*Gdx.graphics.getHeight()/6);
 		
 		for (int i = 0; i < 4; i++) {
