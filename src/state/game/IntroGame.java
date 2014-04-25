@@ -1,5 +1,6 @@
 package state.game;
 
+import handler.DialogBox;
 import handler.TextField;
 import app.Application;
 
@@ -14,6 +15,7 @@ public class IntroGame extends Game{
 
 	int age;
 	TextField field, field2;
+	DialogBox probState;
 	
 	public IntroGame(int age){
 		
@@ -21,12 +23,16 @@ public class IntroGame extends Game{
 		this.age = age;
 		this.field = new TextField(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), true);
 		this.field2 = new TextField(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3), false);
-		this.backgroundColor = Color.BLACK;
+		this.backgroundColor = Color.ORANGE;
 		this.number = 1;
+		
+		probState = new DialogBox("Type your name then your age.", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 	}
 	
 	public void update(){
 		super.update();
+		probState.update(true);
+
 		if(Gdx.input.justTouched()){
 			field.update(Gdx.input.getX(), Gdx.input.getY());
 			field2.update(Gdx.input.getX(), Gdx.input.getY());
@@ -54,6 +60,8 @@ public class IntroGame extends Game{
 		
 		field.render(batch, fadeMultiplier);
 		field2.render(batch, fadeMultiplier);
+		probState.render(batch, fadeMultiplier);
+
 		
 	}
 	
