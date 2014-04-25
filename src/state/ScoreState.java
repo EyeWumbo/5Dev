@@ -21,7 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class ScoreState extends State{
 	
 	Texture oneStar, twoStar, threeStar;
-	Texture g1, g2, g3, g4;
+	Texture g1, g2, g3;
 	Button testButton;
 	int[] gameScores;
 	BitmapFont g1Score;
@@ -33,16 +33,16 @@ public class ScoreState extends State{
 	
 	public ScoreState(){
 				
-		testButton = new Button(3, "Main Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
+		testButton = new Button(3, "Main Menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 5);
 		g1Score = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
 		g2Score = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
 		g3Score = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
-		g4Score = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
+		//g4Score = new BitmapFont(Gdx.files.internal("data/arial-15.fnt"), false);
 		
 		g1 = new Texture(Gdx.files.internal("data/gameLabels/Game1.png"));
 		g2 = new Texture(Gdx.files.internal("data/gameLabels/Game2.png"));
 		g3 = new Texture(Gdx.files.internal("data/gameLabels/Game3.png"));
-		g4 = new Texture(Gdx.files.internal("data/gameLabels/Game4.png"));
+		//g4 = new Texture(Gdx.files.internal("data/gameLabels/Game4.png"));
 
 		oneStar = new Texture(Gdx.files.internal("data/1star.png"));
 		twoStar = new Texture(Gdx.files.internal("data/2star.png"));
@@ -73,20 +73,20 @@ public class ScoreState extends State{
 		super.render(batch);
 		testButton.render(batch, fadeMultiplier);
 		
-		batch.draw(g1, Gdx.graphics.getWidth()/3, 5*Gdx.graphics.getHeight()/6);
-		batch.draw(g2, Gdx.graphics.getWidth()/3, 4*Gdx.graphics.getHeight()/6);
-		batch.draw(g3, Gdx.graphics.getWidth()/3, 3*Gdx.graphics.getHeight()/6);
-		batch.draw(g4, Gdx.graphics.getWidth()/3, 2*Gdx.graphics.getHeight()/6);
+		batch.draw(g1, Gdx.graphics.getWidth()/3, 5*Gdx.graphics.getHeight()/5);
+		batch.draw(g2, Gdx.graphics.getWidth()/3, 4*Gdx.graphics.getHeight()/5);
+		batch.draw(g3, Gdx.graphics.getWidth()/3, 3*Gdx.graphics.getHeight()/5);
+		//batch.draw(g4, Gdx.graphics.getWidth()/3, 2*Gdx.graphics.getHeight()/6);
 		
 		for (int i = 0; i < 4; i++) {
 			if (gameScores[i] == 1){
-				batch.draw(oneStar, Gdx.graphics.getWidth()/2, (5-i)*Gdx.graphics.getHeight()/6);
+				batch.draw(oneStar, Gdx.graphics.getWidth()/2, (4-i)*Gdx.graphics.getHeight()/5);
 			}
 			else if (gameScores[i] == 2) {
-				batch.draw(twoStar, Gdx.graphics.getWidth()/2, (5-i)*Gdx.graphics.getHeight()/6);
+				batch.draw(twoStar, Gdx.graphics.getWidth()/2, (4-i)*Gdx.graphics.getHeight()/5);
 			}
 			else if (gameScores[i] == 3) {
-				batch.draw(threeStar, Gdx.graphics.getWidth()/2, (5-i)* Gdx.graphics.getHeight()/6);
+				batch.draw(threeStar, Gdx.graphics.getWidth()/2, (4-i)* Gdx.graphics.getHeight()/5);
 			}
 		}
 
@@ -125,13 +125,13 @@ public class ScoreState extends State{
 							break;
 						}
 						else {
-							for (int i = 0; i < 4; i++){
+							for (int i = 0; i < 3; i++){
 								in.readLine();
 							}
 						}
 					}
 			}
-			for (int i = 0; i < 4; i++){
+			for (int i = 0; i < 3; i++){
 				gameScores[i] = Integer.parseInt(in.readLine().trim());
 				
 			}

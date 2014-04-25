@@ -21,13 +21,13 @@ public class RoutineState extends State{
 	public RoutineState(){
 		
 		firstGame = 0;
-		gameNum = 4;
+		gameNum = 3;
 		avaliableGames = 1;
-		gamePlayable = new Boolean[gameNum];
+		gamePlayable = new Boolean[gameNum+1];
 		
-		g0 = new Button(11, "Routine Game 0", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-		g1 = new Button(12, "Routine Game 1", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3);
-		g2 = new Button(13 , "Routine Game 2", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 4);
+		g0 = new Button(11, "  Introduction  ", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		g1 = new Button(12, "Pick out a shirt", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 3);
+		g2 = new Button(13, " Catch the bus  ", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 4);
 		g3 = new Button(9 , "Routine Game 3", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 5);
 		g4 = new Button(9 , "Routine Game 4", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
 		g5 = new Button(9 , "Routine Game 5", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 6);
@@ -39,7 +39,7 @@ public class RoutineState extends State{
 		allGames = new Button[] {g0, g1, g2, g3, g4, g5, g6, g7, g8, g9};
 		gamePlayable[0] = true;
 		
-		for (int i = 1; i < gameNum; i++){
+		for (int i = 1; i < gameNum+1; i++){
 			gamePlayable[i] = false;
 		}
 

@@ -29,7 +29,7 @@ public class ShirtGame extends Game{
 		texs[2] = new Texture(new FileHandle("data/shirt_red.png"));
 		texs[3] = new Texture(new FileHandle("data/shirt_white.png"));
 		
-		this.number = 3;
+		this.number = 2;
 		
 		this.backgroundColor = Color.GREEN;
 		

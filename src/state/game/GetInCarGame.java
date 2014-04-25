@@ -27,7 +27,7 @@ public class GetInCarGame extends Game{
 		texs[2] = new Texture(new FileHandle("data/schoolbus.jpg"));
 		texs[3] = new Texture(new FileHandle("data/firetruck.jpg"));
 		
-		this.number = 2;
+		this.number = 3;
 		
 		this.backgroundColor = Color.GREEN;
 		
