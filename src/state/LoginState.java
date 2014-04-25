@@ -120,7 +120,7 @@ public class LoginState extends State {
 		ButtonList = new Vector<Button> ();
 		ButtonNames = new Vector<String> ();
 
-		if(doesFileUSERNAMESExist() == false)
+		if(doesFileExist(filepath) == false)
 		{
 			System.out.println("INSIDE SETUP FX");
 			BufferedWriter writer = null; 
@@ -146,15 +146,6 @@ public class LoginState extends State {
 	}
 	
 	
-	public Boolean doesFileUSERNAMESExist()
-	{
-		File f = new File(filepath);
-		if(f.exists() == true)
-		{
-			return true;
-		}
-		return false; 
-	}
 	
 	public void getNames() throws IOException 
 	{

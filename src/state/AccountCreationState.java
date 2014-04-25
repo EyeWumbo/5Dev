@@ -1,5 +1,6 @@
 package state;
 import java.io.*;
+import java.util.Vector;
 
 import handler.*;
 
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class AccountCreationState extends State{
 	
 	public static final String filepath = "data//USERNAMES.txt";
+	public static final String ScoresPath = "data//SCORES.txt";
 	
 	Button LandingButton; 
 	TextField field;
@@ -65,6 +67,17 @@ public class AccountCreationState extends State{
 		field.render(sRender, fadeMultiplier);
 	}
 	
+	public void setUp() throws IOException
+	{
+		if(doesFileExist(ScoresPath) == false)
+		{
+			BufferedWriter writer = null; 
+			writer = new BufferedWriter(new FileWriter(ScoresPath));
+            writer.write("");
+            writer.close();	
+		}
+	}
+		
 	
 	// does nothing if user already exists
 	public Boolean doesUserExist(String name) throws IOException
@@ -94,12 +107,23 @@ public class AccountCreationState extends State{
 		{
 			// need to write to "login.txt" given a new NAME.
 			BufferedWriter writer = null; 
+			BufferedWriter writer2 = null; 
 			try
 			{
 				File fnames = new File(filepath);
 				writer = new BufferedWriter(new FileWriter(fnames, true));
 	            writer.write(name);
 	            writer.newLine();
+	            
+				File fscores = new File(ScoresPath);
+				writer2 = new BufferedWriter(new FileWriter(fscores, true));
+	            writer2.write(name);
+	            writer2.newLine();
+	            for(int i = 0; i < 4; i++)
+	            {
+	            	writer2.write("0");
+	            	writer2.newLine();
+	            }
 			}
 			catch(Exception e)
 			{
@@ -110,6 +134,7 @@ public class AccountCreationState extends State{
 				try
 				{
 					writer.close();
+					writer2.close();
 				}
 				catch(Exception e)
 				{}
